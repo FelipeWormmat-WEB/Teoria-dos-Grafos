@@ -1,0 +1,63 @@
+def prim(self):
+        
+        mst = set()
+        mst_edges = []
+        start_vertex = list(self.graph.keys())[0]
+        mst.add(start_vertex)
+        edge_queue = [(weight, start_vertex, neighbor) for neighbor, weight in self.graph[start_vertex]]
+        while edge_queue:
+            weight, u, v = heapq.heappop(edge_queue)
+            if v not in mst:
+                mst.add(v)
+                mst_edges.append((u, v, weight))
+                for neighbor, weight in self.graph[v]:
+                    if neighbor not in mst:
+                        heapq.heappush(edge_queue, (weight, v, neighbor))
+        return mst_edges
+
+    def kruskal(self):
+
+        mst_edges = []
+        all_edges = [(weight, u, v) for u in self.graph for v, weight in self.graph[u]]
+        all_edges.sort()
+        parent = {vertex: vertex for vertex in self.graph}
+        def find_set(vertex):
+            if parent[vertex] != vertex:
+                parent[vertex] = find_set(parent[vertex])
+            return parent[vertex]
+        def union(u, v):
+            root_u = find_set(u)
+            root_v = find_set(v)
+            if root_u != root_v:
+                parent[root_u] = root_v
+                return True
+            return False
+        # Constrói a Árvore Geradora Mínima
+        for weight, u, v in all_edges:
+            if union(u, v):
+                mst_edges.append((u, v, weight))
+        return mst_edges
+
+    def has_eulerian_circuit(self):
+        for vertex in self.graph:
+            if self.calculate_degree(vertex) % 2 != 0:
+                return False
+        return True
+
+    def has_hamiltonian_circuit(self):
+        def is_hamiltonian(path):
+            return path[0] == path[-1] and len(path) == len(self.graph)
+        vertices = list(self.graph.keys())
+        permutations = itertools.permutations(vertices)
+        for perm in permutations:
+            if is_hamiltonian(perm):
+                return True
+        return False
+
+
+	a b c d e
+a	  3 2
+c	- 3 - 4 
+b	- - - 1 
+d	- - - - 7
+e	0 3 2 1 7

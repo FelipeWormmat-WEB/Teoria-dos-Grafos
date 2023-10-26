@@ -1,0 +1,21 @@
+calculate_degree(self, vertex): Calcula o grau de um vértice específico.
+
+
+calculate_graph_degree(self): Calcula o grau total do grafo.
+
+bfs(self, start_vertex): Realiza uma busca em largura a partir de um vértice de início start_vertex e retorna a ordem dos 
+vértices visitados.
+
+dfs(self, start_vertex): Realiza uma busca em profundidade a partir de um vértice de início start_vertex e retorna a 
+ordem dos vértices visitados.
+
+dijkstra(self, start_vertex): Executa o algoritmo de Dijkstra a partir de um vértice de início start_vertex e retorna os 
+menores caminhos para todos os outros vértices.
+
+best_first_search(self, start_vertex, target_vertex): Executa o algoritmo de Best-First Search para encontrar um caminho 
+do vértice de início start_vertex para o vértice de destino target_vertex.
+
+a_star_search(self, start_vertex, target_vertex): Executa o algoritmo A* para encontrar um caminho do vértice de início 
+start_vertex para o vértice de destino target_vertex. Requer uma função heurística.
+
+
